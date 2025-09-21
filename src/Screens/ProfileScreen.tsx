@@ -1,6 +1,6 @@
 const ProfileScreen = () => {
   return (
-    <div className="min-w-full">
+    <div className="w-sm">
       <div className="navbar shadow-sm place-content-stretch mb-4">
         <a className="text-md font-bold mx-4">Account Settings</a>
       </div>
