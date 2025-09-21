@@ -2,12 +2,17 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SignupSchema } from "../schemas/zodSchemas";
 import type z from "zod";
+import DisplayError from "../utils/DisplayError";
 
 type SignUp = z.infer<typeof SignupSchema>;
 
 const SignupScreen = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm<SignUp>();
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<SignUp>();
 
   const handleSignUp: SubmitHandler<SignUp> = (data) => {
     console.log(data);
@@ -28,45 +33,53 @@ const SignupScreen = () => {
             type="text"
             placeholder="Enter full name"
             className="input input-sm"
-            {...register("fullName", { required: true })}
+            {...register("fullName", {
+              required: "Full Name is required",
+            })}
           />
           <span className="text-primary">
             Full Name <strong className="text-red-600">*</strong>
           </span>
+          <DisplayError errors={errors} fieldName="fullName" />
         </label>
         <label className="floating-label">
           <input
             type="tel"
             placeholder="Enter phone number"
             className="input input-sm"
-            {...register("phoneNumber", { required: true })}
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+            })}
           />
           <span className="text-primary">
             Phone Number <strong className="text-red-600">*</strong>
           </span>
+          <DisplayError errors={errors} fieldName="phoneNumber" />
         </label>
         <label className="floating-label">
           <input
             type="email"
             placeholder="Enter email address"
             className="input input-sm"
-            {...register("email", { required: true })}
+            {...register("email", { required: "Email is required." })}
           />
           <span className="text-primary">
             Email Address
             <strong className="text-red-600">*</strong>
           </span>
+          <DisplayError errors={errors} fieldName="email" />
         </label>
         <label className="floating-label">
           <input
             type="password"
             placeholder="Enter password"
             className="input input-sm"
-            {...register("password", { required: true })}
+            {...register("password", { required: "Password is required." })}
           />
           <span className="text-primary">
             Password <strong className="text-red-600">*</strong>
           </span>
+          <DisplayError errors={errors} fieldName="password" />
         </label>
         <label className="floating-label">
           <input
@@ -100,6 +113,7 @@ const SignupScreen = () => {
               {...register("isAgency", { required: true })}
             />
             <span>No</span>
+            <DisplayError errors={errors} fieldName="isAgency" />
           </label>
         </fieldset>
         <button className="btn btn-primary btn-sm mt-16">Create Account</button>
