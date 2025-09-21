@@ -5,7 +5,7 @@ const LoginScreen = () => {
       <p className="text-sm text-gray-500 mb-4">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
-      <form className="flex flex-col gap-4">
+      <form action="/profile" className="flex flex-col gap-4">
         <label className="floating-label">
           <input
             type="email"

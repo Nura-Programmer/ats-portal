@@ -2,7 +2,7 @@ const SignupScreen = () => {
   return (
     <div className="w-sm mx-4 my-10 flex flex-col gap-2 p-4">
       <h2 className="text-3xl mb-4">Create your ATS account</h2>
-      <form className="flex flex-col gap-4">
+      <form action="/profile" className="flex flex-col gap-4">
         <label className="floating-label">
           <input
             type="text"
