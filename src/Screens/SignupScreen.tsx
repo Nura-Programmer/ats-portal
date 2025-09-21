@@ -1,10 +1,16 @@
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { SignupSchema } from "../schemas/zodSchemas";
+import type z from "zod";
+
+type SignUp = z.infer<typeof SignupSchema>;
 
 const SignupScreen = () => {
   const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<SignUp>();
 
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSignUp: SubmitHandler<SignUp> = (data) => {
+    console.log(data);
     // Handle form submission logic here
     navigate("/profile");
   };
@@ -15,13 +21,14 @@ const SignupScreen = () => {
       <form
         action="/profile"
         className="flex flex-col gap-4"
-        onSubmit={handleSignUp}
+        onSubmit={handleSubmit(handleSignUp)}
       >
         <label className="floating-label">
           <input
             type="text"
             placeholder="Enter full name"
             className="input input-sm"
+            {...register("fullName", { required: true })}
           />
           <span className="text-primary">
             Full Name <strong className="text-red-600">*</strong>
@@ -32,6 +39,7 @@ const SignupScreen = () => {
             type="tel"
             placeholder="Enter phone number"
             className="input input-sm"
+            {...register("phoneNumber", { required: true })}
           />
           <span className="text-primary">
             Phone Number <strong className="text-red-600">*</strong>
@@ -42,6 +50,7 @@ const SignupScreen = () => {
             type="email"
             placeholder="Enter email address"
             className="input input-sm"
+            {...register("email", { required: true })}
           />
           <span className="text-primary">
             Email Address
@@ -53,6 +62,7 @@ const SignupScreen = () => {
             type="password"
             placeholder="Enter password"
             className="input input-sm"
+            {...register("password", { required: true })}
           />
           <span className="text-primary">
             Password <strong className="text-red-600">*</strong>
@@ -63,6 +73,7 @@ const SignupScreen = () => {
             type="text"
             placeholder="Enter company name"
             className="input input-sm"
+            {...register("companyName")}
           />
           <span className="text-primary">Company Name</span>
         </label>
@@ -74,17 +85,19 @@ const SignupScreen = () => {
           <label className="label">
             <input
               type="radio"
-              name="isAgency"
+              value="yes"
               className="radio radio-primary radio-sm"
               defaultChecked
+              {...register("isAgency", { required: true })}
             />
             <span>Yes</span>
           </label>
           <label className="label">
             <input
               type="radio"
-              name="isAgency"
+              value="no"
               className="radio radio-primary radio-sm"
+              {...register("isAgency", { required: true })}
             />
             <span>No</span>
           </label>

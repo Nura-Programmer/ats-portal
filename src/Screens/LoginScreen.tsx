@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import type z from "zod";
+import type { LoginSchema } from "../schemas/zodSchemas";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+type Login = z.infer<typeof LoginSchema>;
 
 const LoginScreen = () => {
   const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<Login>();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin: SubmitHandler<Login> = (data) => {
+    console.log(data);
     // Handle login logic here
     navigate("/profile");
   };
@@ -15,12 +21,16 @@ const LoginScreen = () => {
       <p className="text-sm text-gray-500 mb-4">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
-      <form onSubmit={handleLogin} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(handleLogin)}
+        className="flex flex-col gap-4"
+      >
         <label className="floating-label">
           <input
             type="email"
             placeholder="Enter email address"
             className="input input-sm"
+            {...register("email", { required: true })}
           />
           <span className="text-primary">
             Email Address
@@ -32,6 +42,7 @@ const LoginScreen = () => {
             type="password"
             placeholder="Enter password"
             className="input input-sm"
+            {...register("password", { required: true })}
           />
           <span className="text-primary">
             Password <strong className="text-red-600">*</strong>
