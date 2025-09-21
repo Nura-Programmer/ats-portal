@@ -1,11 +1,21 @@
+import { useNavigate } from "react-router-dom";
+
 const LoginScreen = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle login logic here
+    navigate("/profile");
+  };
+
   return (
     <div className="w-sm mx-4 my-10 flex flex-col gap-2 p-4">
       <h2 className="text-3xl mb-4">Signin to your ATS account</h2>
       <p className="text-sm text-gray-500 mb-4">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
-      <form action="/profile" className="flex flex-col gap-4">
+      <form onSubmit={handleLogin} className="flex flex-col gap-4">
         <label className="floating-label">
           <input
             type="email"
