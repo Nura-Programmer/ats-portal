@@ -2,7 +2,7 @@ const ProfileScreen = () => {
   return (
     <div className="min-w-full">
       <div className="navbar shadow-sm place-content-stretch mb-4">
-        <a className="btn btn-ghost text-lg">Account Settings</a>
+        <a className="text-md font-bold mx-4">Account Settings</a>
       </div>
 
       <div className="flex gap-6 px-6">
@@ -32,9 +32,7 @@ const ProfileScreen = () => {
         </div>
         <div className="flex-col">
           <ul>
-            <li>
-              <strong>Marry Doe</strong>
-            </li>
+            <li className="font-semibold">Marry Doe</li>
             <li className="text-sm">marry@gmail.com</li>
           </ul>
         </div>

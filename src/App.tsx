@@ -5,7 +5,7 @@ import ProfileScreen from "./Screens/ProfileScreen";
 
 function App() {
   return (
-    <div className="flex justify-center min-h-screen">
+    <div className="flex justify-center min-h-screen font-roboto">
       {/* <LandingScreen /> */}
       {/* <SignupScreen /> */}
       {/* <LoginScreen /> */}
